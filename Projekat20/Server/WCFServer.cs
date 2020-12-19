@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Permissions;
 using System.Security.Principal;
 using System.Text;
 using System.Threading;
@@ -11,6 +12,7 @@ namespace Server
 {
     public class WCFServer : ISpecialUsers
     {
+        [PrincipalPermission(SecurityAction.Demand, Role = "Add")]
         public void AddEntity(long Id, double value,string name)
         {
             Console.WriteLine("Called method: ADD ENTITY");
@@ -24,6 +26,7 @@ namespace Server
             Console.WriteLine("Client name : " + windowsIdentity.Name);     //checking who called method
         }
 
+        [PrincipalPermission(SecurityAction.Demand, Role = "DeleteAll")]
         public void DeleteDatabase()
         {
             Console.WriteLine("Called method: DELETE DATABASE");
@@ -37,6 +40,7 @@ namespace Server
             Console.WriteLine("Client name : " + windowsIdentity.Name);     //checking who called method
         }
 
+        [PrincipalPermission(SecurityAction.Demand, Role = "Delete")]
         public void DeleteEntity(long Id)
         {
             Console.WriteLine("Called method: DELETE ENTITY");
@@ -50,6 +54,7 @@ namespace Server
             Console.WriteLine("Client name : " + windowsIdentity.Name);
         }
 
+        [PrincipalPermission(SecurityAction.Demand, Role = "Modify")]
         public void ModifyID(long oldId, long newId)
         {
             Console.WriteLine("Called method: MODIFY ID");
@@ -63,6 +68,7 @@ namespace Server
             Console.WriteLine("Client name : " + windowsIdentity.Name);
         }
 
+        [PrincipalPermission(SecurityAction.Demand, Role = "Modify")]
         public void ModifyValue(long id, double newValue)
         {
             Console.WriteLine("Called method: MODIFY VALUE");
