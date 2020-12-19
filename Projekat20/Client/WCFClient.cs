@@ -16,11 +16,61 @@ namespace Client
             factory = this.CreateChannel();
         }
 
+        public void ModifyValue(long id, double newValue)
+        {
+
+            try
+            {
+                factory.ModifyValue(id, newValue);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+        }
+
+        public void ModifyID(long oldId, long newId)
+        {
+
+            try
+            {
+                factory.ModifyID(oldId, newId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+        }
+
         public void AddEntity(long Id, double value)
         {
             try
             {
                 factory.AddEntity(Id, value);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+        }
+
+        public void DeleteEntity(long Id)
+        {
+            try
+            {
+                factory.DeleteEntity(Id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+        }
+
+        public void DeleteDatabase()
+        {
+            try
+            {
+                factory.DeleteDatabase();
             }
             catch (Exception e)
             {

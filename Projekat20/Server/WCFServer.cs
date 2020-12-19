@@ -23,5 +23,58 @@ namespace Server
 
             Console.WriteLine("Client name : " + windowsIdentity.Name);     //checking who called method
         }
+
+        public void DeleteDatabase()
+        {
+            Console.WriteLine("Called method: DELETE DATABASE");
+            Console.WriteLine("Not implemented yet");
+            IIdentity identity = Thread.CurrentPrincipal.Identity;
+
+            Console.WriteLine("Autentification type : " + identity.AuthenticationType);
+
+            WindowsIdentity windowsIdentity = identity as WindowsIdentity;
+
+            Console.WriteLine("Client name : " + windowsIdentity.Name);     //checking who called method
+        }
+
+        public void DeleteEntity(long Id)
+        {
+            Console.WriteLine("Called method: DELETE ENTITY");
+            Console.WriteLine("Not implemented yet");
+            IIdentity identity = Thread.CurrentPrincipal.Identity;
+
+            Console.WriteLine("Autentification type : " + identity.AuthenticationType);
+
+            WindowsIdentity windowsIdentity = identity as WindowsIdentity;
+
+            Console.WriteLine("Client name : " + windowsIdentity.Name);
+        }
+
+        public void ModifyID(long oldId, long newId)
+        {
+            Console.WriteLine("Called method: MODIFY ID");
+            Console.WriteLine("Not implemented yet");
+            IIdentity identity = Thread.CurrentPrincipal.Identity;
+
+            Console.WriteLine("Autentification type : " + identity.AuthenticationType);
+
+            WindowsIdentity windowsIdentity = identity as WindowsIdentity;
+
+            Console.WriteLine("Client name : " + windowsIdentity.Name);
+        }
+
+        public void ModifyValue(long id, double newValue)
+        {
+            Console.WriteLine("Called method: MODIFY VALUE");
+            Console.WriteLine("Not implemented yet");
+            IIdentity identity = Thread.CurrentPrincipal.Identity;
+
+            Console.WriteLine("Autentification type : " + identity.AuthenticationType);
+
+            WindowsIdentity windowsIdentity = identity as WindowsIdentity;
+
+            Console.WriteLine("Client name : " + windowsIdentity.Name); // who called ModifyValue
+            //Console.WriteLine("Jedinstveni identifikator : " + windowsIdentity.User);
+        }
     }
 }

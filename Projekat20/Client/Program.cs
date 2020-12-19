@@ -74,7 +74,7 @@ namespace Client
 
                             if (long.TryParse(Console.ReadLine(), out newId))
                             {
-                                //proxy.ModifyID(oldId, newId);
+                                proxy.ModifyID(oldId, newId);
                             }
                             else
                             {
@@ -96,7 +96,7 @@ namespace Client
                             Console.Write("Enter new value: ");
                             if (double.TryParse(Console.ReadLine(), out value))
                             {
-                                //proxy.ModifyValue(i, value);
+                                proxy.ModifyValue(i, value);
                             }
                             else
                             {
@@ -118,7 +118,7 @@ namespace Client
                             Console.Write("Enter value: ");
                             if (double.TryParse(Console.ReadLine(), out v))
                             {
-                                // proxy.ModifyValue(id, v);
+                                 proxy.ModifyValue(id, v);
                             }
                             else
                             {
@@ -136,7 +136,7 @@ namespace Client
                         long del_id;
                         if (long.TryParse(Console.ReadLine(), out del_id))
                         {
-                            //proxy.DeleteEntity(del_id);
+                            proxy.DeleteEntity(del_id);
                         }
                         else
                         {
@@ -145,7 +145,7 @@ namespace Client
                         break;
                     case 6:
                         //Console.WriteLine("Not implemented yet");
-                        //proxy.DeleteDatabase();
+                        proxy.DeleteDatabase();
                         break;
                     case 7:
                         Console.WriteLine("Not implemented yet");
