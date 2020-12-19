@@ -42,11 +42,11 @@ namespace Client
             }
         }
 
-        public void AddEntity(long Id, double value)
+        public void AddEntity(long Id, double value,string name)
         {
             try
             {
-                factory.AddEntity(Id, value);
+                factory.AddEntity(Id, value,name);
             }
             catch (Exception e)
             {

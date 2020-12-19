@@ -17,7 +17,7 @@ namespace Contracts
         void ModifyID(long oldId, long newId);    // only for operators
 
         [OperationContract]
-        void AddEntity(long Id, double value);    // only for administrators
+        void AddEntity(long Id, double value, string name);    // only for administrators
 
         [OperationContract]
         void DeleteEntity(long Id);    // only for administrators

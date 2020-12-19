@@ -37,7 +37,7 @@ namespace Client
                 Console.WriteLine("Client started by : " + WindowsIdentity.GetCurrent().Name);
                 Console.WriteLine("Choose option: ");
                 Console.WriteLine("-----------------------");
-                Console.WriteLine("1. Get bill.");
+                Console.WriteLine("1. Get Electricity Consumption");
                 Console.WriteLine("2. Modify ID (only for operators)");
                 Console.WriteLine("3. Modify value (only for operators)");
                 Console.WriteLine("4. Add entity (only for administrators)");
@@ -113,12 +113,15 @@ namespace Client
                         Console.Write("Enter ID: ");
                         long id;
                         double v;
+                        string name;
                         if (long.TryParse(Console.ReadLine(), out id))
                         {
                             Console.Write("Enter value: ");
                             if (double.TryParse(Console.ReadLine(), out v))
                             {
-                                 proxy.ModifyValue(id, v);
+                                Console.WriteLine("Enter name and surname: ");
+                                name = Console.ReadLine();
+                                proxy.AddEntity(id, v,name);
                             }
                             else
                             {

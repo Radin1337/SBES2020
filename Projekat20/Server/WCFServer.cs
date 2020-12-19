@@ -11,7 +11,7 @@ namespace Server
 {
     public class WCFServer : ISpecialUsers
     {
-        public void AddEntity(long Id, double value)
+        public void AddEntity(long Id, double value,string name)
         {
             Console.WriteLine("Called method: ADD ENTITY");
             Console.WriteLine("Not implemented yet");
