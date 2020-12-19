@@ -11,9 +11,19 @@ namespace RBAC_Model
 {
     public class CustomAuthorizationPolicy : IAuthorizationPolicy
     {
-        public ClaimSet Issuer => throw new NotImplementedException();
+        public CustomAuthorizationPolicy()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
 
-        public string Id => throw new NotImplementedException();
+        public ClaimSet Issuer
+        {
+            get { return ClaimSet.System; }
+        }
+        public string Id
+        {
+            get;
+        }
 
         public bool Evaluate(EvaluationContext evaluationContext, ref object state)
         {
