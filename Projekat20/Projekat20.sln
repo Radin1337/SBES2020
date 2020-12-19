@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{DC8FCE0E-C850-453B-800D-F487A4FBA4D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RBAC_Model", "RBAC_Model\RBAC_Model.csproj", "{49221123-1EB0-495D-B26C-39B6A56C00A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{DC8FCE0E-C850-453B-800D-F487A4FBA4D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC8FCE0E-C850-453B-800D-F487A4FBA4D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC8FCE0E-C850-453B-800D-F487A4FBA4D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49221123-1EB0-495D-B26C-39B6A56C00A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49221123-1EB0-495D-B26C-39B6A56C00A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49221123-1EB0-495D-B26C-39B6A56C00A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49221123-1EB0-495D-B26C-39B6A56C00A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
