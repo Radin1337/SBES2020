@@ -12,6 +12,21 @@ namespace Server
 {
     public class WCFServer : ISpecialUsers
     {
+
+        public void GetElectricityConsumption(string imeprezime, int uid)
+        {
+            Console.WriteLine("GetElectricityConsumption");
+            Console.WriteLine("Not implemented yet");
+            IIdentity identity = Thread.CurrentPrincipal.Identity;
+
+            Console.WriteLine("Authentification type : " + identity.AuthenticationType);
+
+            WindowsIdentity windowsIdentity = identity as WindowsIdentity;
+
+            Console.WriteLine("Client name : " + windowsIdentity.Name);
+        }
+
+
         [PrincipalPermission(SecurityAction.Demand, Role = "Add")]
         public void AddEntity(long Id, double value,string name)
         {
@@ -19,7 +34,7 @@ namespace Server
             Console.WriteLine("Not implemented yet");
             IIdentity identity = Thread.CurrentPrincipal.Identity;
 
-            Console.WriteLine("Autentification type : " + identity.AuthenticationType);
+            Console.WriteLine("Authentification type : " + identity.AuthenticationType);
 
             WindowsIdentity windowsIdentity = identity as WindowsIdentity;
 
@@ -33,7 +48,7 @@ namespace Server
             Console.WriteLine("Not implemented yet");
             IIdentity identity = Thread.CurrentPrincipal.Identity;
 
-            Console.WriteLine("Autentification type : " + identity.AuthenticationType);
+            Console.WriteLine("Authentification type : " + identity.AuthenticationType);
 
             WindowsIdentity windowsIdentity = identity as WindowsIdentity;
 
@@ -47,12 +62,14 @@ namespace Server
             Console.WriteLine("Not implemented yet");
             IIdentity identity = Thread.CurrentPrincipal.Identity;
 
-            Console.WriteLine("Autentification type : " + identity.AuthenticationType);
+            Console.WriteLine("Authentification type : " + identity.AuthenticationType);
 
             WindowsIdentity windowsIdentity = identity as WindowsIdentity;
 
             Console.WriteLine("Client name : " + windowsIdentity.Name);
         }
+
+       
 
         [PrincipalPermission(SecurityAction.Demand, Role = "Modify")]
         public void ModifyID(long oldId, long newId)
@@ -61,7 +78,7 @@ namespace Server
             Console.WriteLine("Not implemented yet");
             IIdentity identity = Thread.CurrentPrincipal.Identity;
 
-            Console.WriteLine("Autentification type : " + identity.AuthenticationType);
+            Console.WriteLine("Authentification type : " + identity.AuthenticationType);
 
             WindowsIdentity windowsIdentity = identity as WindowsIdentity;
 
@@ -75,7 +92,7 @@ namespace Server
             Console.WriteLine("Not implemented yet");
             IIdentity identity = Thread.CurrentPrincipal.Identity;
 
-            Console.WriteLine("Autentification type : " + identity.AuthenticationType);
+            Console.WriteLine("Authentification type : " + identity.AuthenticationType);
 
             WindowsIdentity windowsIdentity = identity as WindowsIdentity;
 

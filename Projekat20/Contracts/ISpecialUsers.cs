@@ -24,5 +24,8 @@ namespace Contracts
 
         [OperationContract]
         void DeleteDatabase();    // only for super administrators
+
+        [OperationContract]
+        void GetElectricityConsumption(string imeprezime, int uid);
     }
 }

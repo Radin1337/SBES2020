@@ -118,12 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Admins" xml:space="preserve">
-    <value>Add,Delete</value>
+    <value>Read,Add,Delete</value>
+  </data>
+  <data name="Consumers" xml:space="preserve">
+    <value>Read</value>
   </data>
   <data name="Operators" xml:space="preserve">
-    <value>Modify</value>
+    <value>Read,Modify</value>
   </data>
   <data name="SuperAdmins" xml:space="preserve">
-    <value>DeleteAll</value>
+    <value>Read,DeleteAll</value>
   </data>
 </root>

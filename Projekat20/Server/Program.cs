@@ -7,6 +7,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Server
@@ -24,6 +25,7 @@ namespace Server
             ServiceHost host = new ServiceHost(typeof(WCFServer));
             host.AddServiceEndpoint(typeof(ISpecialUsers), binding, address);
 
+            host.Authorization.ServiceAuthorizationManager = new CustomAuthorizationManager();
             //set custom policy
             host.Authorization.PrincipalPermissionMode = PrincipalPermissionMode.Custom;
             List<IAuthorizationPolicy> policies = new List<IAuthorizationPolicy>();
@@ -32,6 +34,7 @@ namespace Server
 
 
             host.Open();
+            
             Console.ReadLine();
 
         }

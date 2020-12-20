@@ -19,7 +19,7 @@ namespace RBAC_Model {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class RolesConfigFile {
@@ -61,7 +61,7 @@ namespace RBAC_Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add,Delete.
+        ///   Looks up a localized string similar to Read,Add,Delete.
         /// </summary>
         internal static string Admins {
             get {
@@ -70,7 +70,16 @@ namespace RBAC_Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Modify.
+        ///   Looks up a localized string similar to Read.
+        /// </summary>
+        internal static string Consumers {
+            get {
+                return ResourceManager.GetString("Consumers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read,Modify.
         /// </summary>
         internal static string Operators {
             get {
@@ -79,7 +88,7 @@ namespace RBAC_Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DeleteAll.
+        ///   Looks up a localized string similar to Read,DeleteAll.
         /// </summary>
         internal static string SuperAdmins {
             get {

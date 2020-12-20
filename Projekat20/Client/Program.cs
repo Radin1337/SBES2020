@@ -57,8 +57,24 @@ namespace Client
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine("Not implemented yet");
-
+                        Console.WriteLine("Enter name and surname: ");
+                        String imeprezime = Console.ReadLine();
+                        while (true)
+                        {
+                            Console.WriteLine("Enter yours unique ID");
+                            int uid = -1;
+                            String uidunos = Console.ReadLine();
+                        
+                            if (int.TryParse(uidunos, out uid))
+                            {
+                                proxy.GetElectricityConsumption(imeprezime, uid);
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid input");
+                            }
+                        }
                         break;
                     case 2:
                         //Console.WriteLine("Not implemented yet");
