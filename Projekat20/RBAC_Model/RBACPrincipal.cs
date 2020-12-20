@@ -23,17 +23,17 @@ namespace RBAC_Model
 
         public bool IsInRole(string permission)
         {
-            foreach (IdentityReference group in this.identity.Groups)//prolazimo kroz sve grupe, pokusavamo da izvucemo grupu odredjenu
+            foreach (IdentityReference group in this.identity.Groups)//through all groups
             {
-                SecurityIdentifier sid = (SecurityIdentifier)group.Translate(typeof(SecurityIdentifier)); // za svaku grupu dolazimo do imena
+                SecurityIdentifier sid = (SecurityIdentifier)group.Translate(typeof(SecurityIdentifier));
                 var name = sid.Translate(typeof(NTAccount));
-                string groupName = Formatter.ParseName(name.ToString());// dolazimo do imena same grupe
+                string groupName = Formatter.ParseName(name.ToString());
                 string[] permissions;
-                if (RolesConfig.GetPermissions(groupName, out permissions))// da li neka grupa ima tu permisiju,ako postoji grupa, dobijamo permsije u nizu stringova
+                if (RolesConfig.GetPermissions(groupName, out permissions))
                 {
-                    foreach (string permision in permissions) //prolazimo kroz sve prermisije
+                   foreach (string permision in permissions) //through all permissions
                     {
-                        if (permission.Equals(permission))//proveravamo da li se permisije podudaraju iz grupe  sa permisijom koja je stigla kao parametar
+                        if (permision.Equals(permission))//check permission match
                             return true;
                     }
                     // return permissions.Contains(permission);                   
