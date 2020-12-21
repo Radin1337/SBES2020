@@ -17,12 +17,8 @@ namespace Server
 
         public void GetElectricityConsumption(string imeprezime, string uid)
         {
-            Console.WriteLine("GetElectricityConsumption");
-            Console.WriteLine("Not implemented yet");
+            Console.WriteLine("Called method: GET ELECTRICITY CONSUMPTION");
 
-            Console.WriteLine("Decrypted: " + DecryptionAlgorithm.DecryptMessage(imeprezime, SecretKey.sKey));
-
-            Console.WriteLine("EncryptedMessage: " + imeprezime + uid);
             IIdentity identity = Thread.CurrentPrincipal.Identity;
 
             Console.WriteLine("Authentification type : " + identity.AuthenticationType);
@@ -31,7 +27,12 @@ namespace Server
 
             Console.WriteLine("Client name : " + windowsIdentity.Name);
 
-            List<string> retValue = ForwardToLoadBalancer(new List<string> { "GetElectricityConsumption", imeprezime, uid});
+            Console.WriteLine("Encrypted messages: \n" + imeprezime + "\n" + uid);
+
+            string decryptedImePrezime = DecryptionAlgorithm.DecryptMessage(imeprezime, SecretKey.sKey);
+            string decryptedUId = DecryptionAlgorithm.DecryptMessage(uid, SecretKey.sKey);
+
+            List<string> retValue = ForwardToLoadBalancer(new List<string> { "GetElectricityConsumption", decryptedImePrezime, decryptedUId});
         }
 
 
@@ -48,7 +49,13 @@ namespace Server
 
             Console.WriteLine("Client name : " + windowsIdentity.Name);
 
-            List<string> retValue = ForwardToLoadBalancer(new List<string> {"AddEntity",value.ToString(),name });
+            Console.WriteLine("Encrypted messages: \n" + Id + "\n" + value + "\n" + name);
+
+            string decryptedId = DecryptionAlgorithm.DecryptMessage(Id, SecretKey.sKey);
+            string decryptedValue = DecryptionAlgorithm.DecryptMessage(value, SecretKey.sKey);
+            string decryptedName = DecryptionAlgorithm.DecryptMessage(name, SecretKey.sKey);
+
+            List<string> retValue = ForwardToLoadBalancer(new List<string> {"AddEntity",decryptedId, decryptedValue,decryptedName });
         }
 
         [PrincipalPermission(SecurityAction.Demand, Role = "DeleteAll")]
@@ -80,7 +87,11 @@ namespace Server
 
             Console.WriteLine("Client name : " + windowsIdentity.Name);
 
-            List<string> retValue = ForwardToLoadBalancer(new List<string> {"DeleteEntity",Id.ToString() });
+            Console.WriteLine("Encrypted messages: \n" + Id);
+
+            string decryptedId = DecryptionAlgorithm.DecryptMessage(Id, SecretKey.sKey);
+
+            List<string> retValue = ForwardToLoadBalancer(new List<string> {"DeleteEntity",decryptedId});
         }
 
        
@@ -98,7 +109,12 @@ namespace Server
 
             Console.WriteLine("Client name : " + windowsIdentity.Name);
 
-            List<string> retValue = ForwardToLoadBalancer(new List<string> {"modifyID", oldId.ToString(),newId.ToString() });
+            Console.WriteLine("Encrypted messages: \n" + oldId + "\n" + newId);
+
+            string decryptedOldId = DecryptionAlgorithm.DecryptMessage(oldId, SecretKey.sKey);
+            string decryptedNewId = DecryptionAlgorithm.DecryptMessage(newId, SecretKey.sKey);
+
+            List<string> retValue = ForwardToLoadBalancer(new List<string> {"modifyID", decryptedOldId, decryptedNewId });
         }
 
         [PrincipalPermission(SecurityAction.Demand, Role = "Modify")]
@@ -114,7 +130,12 @@ namespace Server
 
             Console.WriteLine("Client name : " + windowsIdentity.Name);
 
-            List<string> retValue = ForwardToLoadBalancer(new List<string> {"modifyValue",id.ToString(),newValue.ToString() });
+            Console.WriteLine("Encrypted messages: \n" + id + "\n" + newValue);
+
+            string decryptedId = DecryptionAlgorithm.DecryptMessage(id, SecretKey.sKey);
+            string decryptedNewValue = DecryptionAlgorithm.DecryptMessage(newValue, SecretKey.sKey);
+
+            List<string> retValue = ForwardToLoadBalancer(new List<string> {"modifyValue", decryptedId, decryptedNewValue});
         }
 
 

@@ -29,7 +29,8 @@ namespace Client
         {
             try
             {
-                factory.GetElectricityConsumption(EncryptionAlgorithm.EncryptMesssage(imeprezime, sKey), uid);
+                factory.GetElectricityConsumption(EncryptionAlgorithm.EncryptMesssage(imeprezime, sKey),
+                                                  EncryptionAlgorithm.EncryptMesssage(uid, sKey));
             }
             catch(SecurityAccessDeniedException es){
                 Console.WriteLine("There was a error completing action: 'GetElectricityConsumption'. Message: " + es.Message);
@@ -45,7 +46,8 @@ namespace Client
 
             try
             {
-                factory.ModifyValue(id, newValue);
+                factory.ModifyValue(EncryptionAlgorithm.EncryptMesssage(id, sKey),
+                                    EncryptionAlgorithm.EncryptMesssage(newValue, sKey));
             }
             catch (SecurityAccessDeniedException es)
             {
@@ -62,7 +64,8 @@ namespace Client
 
             try
             {
-                factory.ModifyID(oldId, newId);
+                factory.ModifyID(EncryptionAlgorithm.EncryptMesssage(oldId, sKey),
+                                 EncryptionAlgorithm.EncryptMesssage(newId, sKey));
             }
             catch (SecurityAccessDeniedException es)
             {
@@ -78,7 +81,9 @@ namespace Client
         {
             try
             {
-                factory.AddEntity(Id, value,name);
+                factory.AddEntity(EncryptionAlgorithm.EncryptMesssage(Id, sKey),
+                                  EncryptionAlgorithm.EncryptMesssage(value, sKey),
+                                  EncryptionAlgorithm.EncryptMesssage(name, sKey));
             }
             catch (SecurityAccessDeniedException es)
             {
@@ -94,7 +99,7 @@ namespace Client
         {
             try
             {
-                factory.DeleteEntity(Id);
+                factory.DeleteEntity(EncryptionAlgorithm.EncryptMesssage(Id, sKey));
             }
             catch (SecurityAccessDeniedException es)
             {
