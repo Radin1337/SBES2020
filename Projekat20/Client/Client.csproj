@@ -56,6 +56,10 @@
       <Project>{DC8FCE0E-C850-453B-800D-F487A4FBA4D4}</Project>
       <Name>Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EncryptionAES\EncryptionAES.csproj">
+      <Project>{7711f284-69d1-4c7d-bd57-467fa85573d8}</Project>
+      <Name>EncryptionAES</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

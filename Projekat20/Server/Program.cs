@@ -9,11 +9,13 @@ using System.ServiceModel.Description;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using DecryptionAES;
 
 namespace Server
 {
     class Program
     {
+
         static void Main(string[] args)
         {
             NetTcpBinding binding = new NetTcpBinding();
@@ -32,6 +34,7 @@ namespace Server
             policies.Add(new CustomAuthorizationPolicy());
             host.Authorization.ExternalAuthorizationPolicies = policies.AsReadOnly();
 
+            SecretKey.GenerateKey();
 
             host.Open();
             

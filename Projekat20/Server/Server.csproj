@@ -57,6 +57,10 @@
       <Project>{DC8FCE0E-C850-453B-800D-F487A4FBA4D4}</Project>
       <Name>Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DecryptionAES\DecryptionAES.csproj">
+      <Project>{e25a736d-fb62-4192-b544-375e9cb524f4}</Project>
+      <Name>DecryptionAES</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RBAC_Model\RBAC_Model.csproj">
       <Project>{49221123-1EB0-495D-B26C-39B6A56C00A4}</Project>
       <Name>RBAC_Model</Name>

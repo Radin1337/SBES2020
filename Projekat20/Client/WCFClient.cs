@@ -7,6 +7,7 @@ using System.ServiceModel;
 using System.ServiceModel.Security;
 using System.Text;
 using System.Threading.Tasks;
+using EncryptionAES;
 
 namespace Client
 {
@@ -14,23 +15,21 @@ namespace Client
     {
         ISpecialUsers factory;
         NetTcpBinding binding2 = new NetTcpBinding();
-        
+        string sKey = "";
 
 
 
         public WCFClient(NetTcpBinding binding, string address) : base(binding, address)
         {
             factory = this.CreateChannel();
-            
+            sKey = factory.GetSecretKey();
         }
 
-       
-
-        public void GetElectricityConsumption(string imeprezime, int uid)
+        public void GetElectricityConsumption(string imeprezime, string uid)
         {
             try
             {
-                factory.GetElectricityConsumption(imeprezime, uid);
+                factory.GetElectricityConsumption(EncryptionAlgorithm.EncryptMesssage(imeprezime, sKey), uid);
             }
             catch(SecurityAccessDeniedException es){
                 Console.WriteLine("There was a error completing action: 'GetElectricityConsumption'. Message: " + es.Message);
@@ -41,7 +40,7 @@ namespace Client
             }
         }
 
-        public void ModifyValue(long id, double newValue)
+        public void ModifyValue(string id, string newValue)
         {
 
             try
@@ -58,7 +57,7 @@ namespace Client
             }
         }
 
-        public void ModifyID(long oldId, long newId)
+        public void ModifyID(string oldId, string newId)
         {
 
             try
@@ -75,7 +74,7 @@ namespace Client
             }
         }
 
-        public void AddEntity(long Id, double value,string name)
+        public void AddEntity(string Id, string value,string name)
         {
             try
             {
@@ -91,7 +90,7 @@ namespace Client
             }
         }
 
-        public void DeleteEntity(long Id)
+        public void DeleteEntity(string Id)
         {
             try
             {
@@ -121,6 +120,11 @@ namespace Client
             {
                 Console.WriteLine("Error: {0}", e.Message);
             }
+        }
+
+        public string GetSecretKey()
+        {
+            return factory.GetSecretKey();
         }
     }
 }
