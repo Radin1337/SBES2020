@@ -19,13 +19,19 @@ namespace Client
 
             string address = "net.tcp://localhost:9999/WCFServer";
 
-
-            using (WCFClient proxy = new WCFClient(binding, address))
+            try
             {
+                WCFClient proxy = new WCFClient(binding, address);
                 Menu(proxy);
+                
+                Console.ReadLine();
             }
-
-            Console.ReadLine();
+            catch(Exception e)
+            {
+                
+                Console.WriteLine("There was a error." + e.Message);
+                Console.ReadKey();
+            }
 
         }
 
