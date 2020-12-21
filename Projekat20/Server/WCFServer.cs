@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Permissions;
 using System.Security.Principal;
+using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -29,6 +30,8 @@ namespace Server
             WindowsIdentity windowsIdentity = identity as WindowsIdentity;
 
             Console.WriteLine("Client name : " + windowsIdentity.Name);
+
+            List<string> retValue = ForwardToLoadBalancer(new List<string> { "GetElectricityConsumption", imeprezime, uid});
         }
 
 
@@ -36,35 +39,7 @@ namespace Server
         public void AddEntity(string Id, string value,string name)
         {
             Console.WriteLine("Called method: ADD ENTITY");
-            Console.WriteLine("Not implemented yet");
-            IIdentity identity = Thread.CurrentPrincipal.Identity;
-
-            Console.WriteLine("Authentification type : " + identity.AuthenticationType);
-
-            WindowsIdentity windowsIdentity = identity as WindowsIdentity;
-
-            Console.WriteLine("Client name : " + windowsIdentity.Name);     //checking who called method
-        }
-
-        [PrincipalPermission(SecurityAction.Demand, Role = "DeleteAll")]
-        public void DeleteDatabase()
-        {
-            Console.WriteLine("Called method: DELETE DATABASE");
-            Console.WriteLine("Not implemented yet");
-            IIdentity identity = Thread.CurrentPrincipal.Identity;
-
-            Console.WriteLine("Authentification type : " + identity.AuthenticationType);
-
-            WindowsIdentity windowsIdentity = identity as WindowsIdentity;
-
-            Console.WriteLine("Client name : " + windowsIdentity.Name);     //checking who called method
-        }
-
-        [PrincipalPermission(SecurityAction.Demand, Role = "Delete")]
-        public void DeleteEntity(string Id)
-        {
-            Console.WriteLine("Called method: DELETE ENTITY");
-            Console.WriteLine("Not implemented yet");
+            
             IIdentity identity = Thread.CurrentPrincipal.Identity;
 
             Console.WriteLine("Authentification type : " + identity.AuthenticationType);
@@ -72,6 +47,40 @@ namespace Server
             WindowsIdentity windowsIdentity = identity as WindowsIdentity;
 
             Console.WriteLine("Client name : " + windowsIdentity.Name);
+
+            List<string> retValue = ForwardToLoadBalancer(new List<string> {"AddEntity",value.ToString(),name });
+        }
+
+        [PrincipalPermission(SecurityAction.Demand, Role = "DeleteAll")]
+        public void DeleteDatabase()
+        {
+            Console.WriteLine("Called method: DELETE DATABASE");
+            
+            IIdentity identity = Thread.CurrentPrincipal.Identity;
+
+            Console.WriteLine("Authentification type : " + identity.AuthenticationType);
+
+            WindowsIdentity windowsIdentity = identity as WindowsIdentity;
+
+            Console.WriteLine("Client name : " + windowsIdentity.Name);
+
+            List<string> retValue = ForwardToLoadBalancer(new List<string> {"DeleteDatabase" });
+        }
+
+        [PrincipalPermission(SecurityAction.Demand, Role = "Delete")]
+        public void DeleteEntity(string Id)
+        {
+            Console.WriteLine("Called method: DELETE ENTITY");
+            
+            IIdentity identity = Thread.CurrentPrincipal.Identity;
+
+            Console.WriteLine("Authentification type : " + identity.AuthenticationType);
+
+            WindowsIdentity windowsIdentity = identity as WindowsIdentity;
+
+            Console.WriteLine("Client name : " + windowsIdentity.Name);
+
+            List<string> retValue = ForwardToLoadBalancer(new List<string> {"DeleteEntity",Id.ToString() });
         }
 
        
@@ -80,7 +89,7 @@ namespace Server
         public void ModifyID(string oldId, string newId)
         {
             Console.WriteLine("Called method: MODIFY ID");
-            Console.WriteLine("Not implemented yet");
+            
             IIdentity identity = Thread.CurrentPrincipal.Identity;
 
             Console.WriteLine("Authentification type : " + identity.AuthenticationType);
@@ -88,21 +97,39 @@ namespace Server
             WindowsIdentity windowsIdentity = identity as WindowsIdentity;
 
             Console.WriteLine("Client name : " + windowsIdentity.Name);
+
+            List<string> retValue = ForwardToLoadBalancer(new List<string> {"modifyID", oldId.ToString(),newId.ToString() });
         }
 
         [PrincipalPermission(SecurityAction.Demand, Role = "Modify")]
         public void ModifyValue(string id, string newValue)
         {
             Console.WriteLine("Called method: MODIFY VALUE");
-            Console.WriteLine("Not implemented yet");
+            
             IIdentity identity = Thread.CurrentPrincipal.Identity;
 
             Console.WriteLine("Authentification type : " + identity.AuthenticationType);
 
             WindowsIdentity windowsIdentity = identity as WindowsIdentity;
 
-            Console.WriteLine("Client name : " + windowsIdentity.Name); // who called ModifyValue
-            //Console.WriteLine("Jedinstveni identifikator : " + windowsIdentity.User);
+            Console.WriteLine("Client name : " + windowsIdentity.Name);
+
+            List<string> retValue = ForwardToLoadBalancer(new List<string> {"modifyValue",id.ToString(),newValue.ToString() });
+        }
+
+
+        //funkcija za konektovanje na load balancer i prosledjivanje zahteva
+        static List<string> ForwardToLoadBalancer(List<string> actionAndParameters)
+        {
+            NetTcpBinding binding = new NetTcpBinding();
+            binding.Security.Mode = SecurityMode.Transport;
+            binding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign;
+            binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Windows;
+            ChannelFactory<ILoadBalancer> factory = new ChannelFactory<ILoadBalancer>(binding, new
+           EndpointAddress("net.tcp://localhost:9998/LoadBalancer"));
+            ILoadBalancer proxy = factory.CreateChannel();
+            List<string> returnValue = proxy.demandWork(actionAndParameters);
+            return returnValue;
         }
 
         public string GetSecretKey()
@@ -110,4 +137,5 @@ namespace Server
             return SecretKey.sKey;
         }
     }
+    
 }

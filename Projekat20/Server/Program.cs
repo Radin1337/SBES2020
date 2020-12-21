@@ -37,7 +37,7 @@ namespace Server
             SecretKey.GenerateKey();
 
             host.Open();
-            
+            Console.WriteLine("Server started working. Press any key to exit.");
             Console.ReadLine();
 
         }
