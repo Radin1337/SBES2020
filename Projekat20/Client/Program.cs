@@ -67,7 +67,7 @@ namespace Client
                         
                             if (int.TryParse(uidunos, out uid))
                             {
-                                proxy.GetElectricityConsumption(imeprezime, uid);
+                                proxy.GetElectricityConsumption(imeprezime, uid.ToString());
                                 break;
                             }
                             else
@@ -90,7 +90,7 @@ namespace Client
 
                             if (long.TryParse(Console.ReadLine(), out newId))
                             {
-                                proxy.ModifyID(oldId, newId);
+                                proxy.ModifyID(oldId.ToString(), newId.ToString());
                             }
                             else
                             {
@@ -112,7 +112,7 @@ namespace Client
                             Console.Write("Enter new value: ");
                             if (double.TryParse(Console.ReadLine(), out value))
                             {
-                                proxy.ModifyValue(i, value);
+                                proxy.ModifyValue(i.ToString(), value.ToString());
                             }
                             else
                             {
@@ -137,7 +137,7 @@ namespace Client
                             {
                                 Console.WriteLine("Enter name and surname: ");
                                 name = Console.ReadLine();
-                                proxy.AddEntity(id, v,name);
+                                proxy.AddEntity(id.ToString(), v.ToString(), name);
                             }
                             else
                             {
@@ -155,7 +155,7 @@ namespace Client
                         long del_id;
                         if (long.TryParse(Console.ReadLine(), out del_id))
                         {
-                            proxy.DeleteEntity(del_id);
+                            proxy.DeleteEntity(del_id.ToString());
                         }
                         else
                         {

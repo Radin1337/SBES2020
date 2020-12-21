@@ -26,7 +26,7 @@ namespace Client
 
        
 
-        public void GetElectricityConsumption(string imeprezime, int uid)
+        public void GetElectricityConsumption(string imeprezime, string uid)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace Client
             }
         }
 
-        public void ModifyValue(long id, double newValue)
+        public void ModifyValue(string id, string newValue)
         {
 
             try
@@ -58,7 +58,7 @@ namespace Client
             }
         }
 
-        public void ModifyID(long oldId, long newId)
+        public void ModifyID(string oldId, string newId)
         {
 
             try
@@ -75,7 +75,7 @@ namespace Client
             }
         }
 
-        public void AddEntity(long Id, double value,string name)
+        public void AddEntity(string Id, string value,string name)
         {
             try
             {
@@ -91,7 +91,7 @@ namespace Client
             }
         }
 
-        public void DeleteEntity(long Id)
+        public void DeleteEntity(string Id)
         {
             try
             {
