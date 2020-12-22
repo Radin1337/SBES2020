@@ -63,9 +63,9 @@ namespace RBAC_Model {
         /// <summary>
         ///   Looks up a localized string similar to Authentication failed for User {0}..
         /// </summary>
-        internal static string AuthenticationFailure {
+        internal static string AuthenticationFailed {
             get {
-                return ResourceManager.GetString("AuthenticationFailure", resourceCulture);
+                return ResourceManager.GetString("AuthenticationFailed", resourceCulture);
             }
         }
         
@@ -81,9 +81,9 @@ namespace RBAC_Model {
         /// <summary>
         ///   Looks up a localized string similar to User {0} failed to access {1}. Reason: {2}..
         /// </summary>
-        internal static string AuthorizationFailure {
+        internal static string AuthorizationFailed {
             get {
-                return ResourceManager.GetString("AuthorizationFailure", resourceCulture);
+                return ResourceManager.GetString("AuthorizationFailed", resourceCulture);
             }
         }
         
