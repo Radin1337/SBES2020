@@ -14,7 +14,6 @@ namespace Server
 {
     public class WCFServer : ISpecialUsers
     {
-
         public string GetElectricityConsumption(string imeprezime, string uid)
         {
             Console.WriteLine("Called method: GET ELECTRICITY CONSUMPTION");

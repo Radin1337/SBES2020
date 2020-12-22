@@ -14,7 +14,23 @@ namespace RBAC_Model
         {
             RBACPrincipal principal = operationContext.ServiceSecurityContext.
                  AuthorizationContext.Properties["Principal"] as RBACPrincipal;
-            return principal.IsInRole("Read");
+
+            bool retVal = principal.IsInRole("Read");
+
+            if (!retVal)
+            {
+                try
+                {
+                    Audit.AuthorizationFailed(Formatter.ParseName(principal.Identity.Name),
+                        OperationContext.Current.IncomingMessageHeaders.Action, "Need Read permission.");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+
+            return retVal;
         }
     }
 }

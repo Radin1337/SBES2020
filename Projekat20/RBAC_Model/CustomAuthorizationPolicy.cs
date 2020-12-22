@@ -39,6 +39,29 @@ namespace RBAC_Model
                 return false;
             }
 
+            bool success = false;
+
+            try
+            {
+                Audit.AuthenticationSuccess(Formatter.ParseName(((WindowsIdentity)identities[0]).Name));
+                success = true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            if (!success)
+            {
+                try
+                {
+                    Audit.AuthenticationFailed(Formatter.ParseName(((WindowsIdentity)identities[0]).Name));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+
             evaluationContext.Properties["Principal"] = new RBACPrincipal((WindowsIdentity)identities[0]);//get windowsidentity
             return true;
         }
