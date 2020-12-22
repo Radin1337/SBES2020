@@ -23,7 +23,7 @@ namespace Client
             {
                 WCFClient proxy = new WCFClient(binding, address);
                 Menu(proxy);
-                
+                Console.WriteLine("Press any key to exit client");
                 Console.ReadLine();
             }
             catch(Exception e)
@@ -50,7 +50,7 @@ namespace Client
                 Console.WriteLine("5. Delete entity (only for administrators)");
                 Console.WriteLine("6. Delete database (only for super-administrators)");
                 Console.WriteLine("7. Archive database (only for super-administrators)");
-
+                Console.WriteLine("8. Exit");
 
                 int choice = 0;
                 if (!int.TryParse(Console.ReadLine(), out choice))
@@ -73,7 +73,7 @@ namespace Client
                         
                             if (int.TryParse(uidunos, out uid))
                             {
-                                proxy.GetElectricityConsumption(imeprezime, uid.ToString());
+                                Console.WriteLine(proxy.GetElectricityConsumption(imeprezime, uid.ToString()));
                                 break;
                             }
                             else
@@ -96,7 +96,7 @@ namespace Client
 
                             if (long.TryParse(Console.ReadLine(), out newId))
                             {
-                                proxy.ModifyID(oldId.ToString(), newId.ToString());
+                                Console.WriteLine(proxy.ModifyID(oldId.ToString(), newId.ToString()));
                             }
                             else
                             {
@@ -118,7 +118,7 @@ namespace Client
                             Console.Write("Enter new value: ");
                             if (double.TryParse(Console.ReadLine(), out value))
                             {
-                                proxy.ModifyValue(i.ToString(), value.ToString());
+                                Console.WriteLine(proxy.ModifyValue(i.ToString(), value.ToString()));
                             }
                             else
                             {
@@ -143,7 +143,7 @@ namespace Client
                             {
                                 Console.WriteLine("Enter name and surname: ");
                                 name = Console.ReadLine();
-                                proxy.AddEntity(id.ToString(), v.ToString(), name);
+                                Console.WriteLine(proxy.AddEntity(id.ToString(), v.ToString(), name));
                             }
                             else
                             {
@@ -161,7 +161,7 @@ namespace Client
                         long del_id;
                         if (long.TryParse(Console.ReadLine(), out del_id))
                         {
-                            proxy.DeleteEntity(del_id.ToString());
+                            Console.WriteLine(proxy.DeleteEntity(del_id.ToString()));
                         }
                         else
                         {
@@ -170,11 +170,13 @@ namespace Client
                         break;
                     case 6:
                         //Console.WriteLine("Not implemented yet");
-                        proxy.DeleteDatabase();
+                        Console.WriteLine(proxy.DeleteDatabase());
                         break;
                     case 7:
-                        Console.WriteLine("Not implemented yet");
+                        Console.WriteLine(proxy.ArchiveDatabase());
                         break;
+                    case 8:
+                        return;
                     default:
                         break;
                 }

@@ -40,8 +40,8 @@ namespace LoadBalancer
                 {
                     if(cnt == lastworker)
                     {
-                        item.DoSomeWork(input);
-                        break;
+                        return item.DoSomeWork(input);
+                        //break;
                     }
                     cnt++;
                 }

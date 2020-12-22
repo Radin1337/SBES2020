@@ -25,11 +25,11 @@ namespace Client
             sKey = factory.GetSecretKey();
         }
 
-        public void GetElectricityConsumption(string imeprezime, string uid)
+        public string GetElectricityConsumption(string imeprezime, string uid)
         {
             try
             {
-                factory.GetElectricityConsumption(EncryptionAlgorithm.EncryptMesssage(imeprezime, sKey),
+               return factory.GetElectricityConsumption(EncryptionAlgorithm.EncryptMesssage(imeprezime, sKey),
                                                   EncryptionAlgorithm.EncryptMesssage(uid, sKey));
             }
             catch(SecurityAccessDeniedException es){
@@ -39,14 +39,15 @@ namespace Client
             {
                 Console.WriteLine("Error: {0}", e.Message);
             }
+            return "";
         }
 
-        public void ModifyValue(string id, string newValue)
+        public string ModifyValue(string id, string newValue)
         {
 
             try
             {
-                factory.ModifyValue(EncryptionAlgorithm.EncryptMesssage(id, sKey),
+                return factory.ModifyValue(EncryptionAlgorithm.EncryptMesssage(id, sKey),
                                     EncryptionAlgorithm.EncryptMesssage(newValue, sKey));
             }
             catch (SecurityAccessDeniedException es)
@@ -57,14 +58,15 @@ namespace Client
             {
                 Console.WriteLine("Error: {0}", e.Message);
             }
+            return "";
         }
 
-        public void ModifyID(string oldId, string newId)
+        public string ModifyID(string oldId, string newId)
         {
 
             try
             {
-                factory.ModifyID(EncryptionAlgorithm.EncryptMesssage(oldId, sKey),
+                return factory.ModifyID(EncryptionAlgorithm.EncryptMesssage(oldId, sKey),
                                  EncryptionAlgorithm.EncryptMesssage(newId, sKey));
             }
             catch (SecurityAccessDeniedException es)
@@ -75,13 +77,14 @@ namespace Client
             {
                 Console.WriteLine("Error: {0}", e.Message);
             }
+            return "";
         }
 
-        public void AddEntity(string Id, string value,string name)
+        public string AddEntity(string Id, string value,string name)
         {
             try
             {
-                factory.AddEntity(EncryptionAlgorithm.EncryptMesssage(Id, sKey),
+                return factory.AddEntity(EncryptionAlgorithm.EncryptMesssage(Id, sKey),
                                   EncryptionAlgorithm.EncryptMesssage(value, sKey),
                                   EncryptionAlgorithm.EncryptMesssage(name, sKey));
             }
@@ -93,13 +96,14 @@ namespace Client
             {
                 Console.WriteLine("Error: {0}", e.Message);
             }
+            return "";
         }
 
-        public void DeleteEntity(string Id)
+        public string DeleteEntity(string Id)
         {
             try
             {
-                factory.DeleteEntity(EncryptionAlgorithm.EncryptMesssage(Id, sKey));
+                return factory.DeleteEntity(EncryptionAlgorithm.EncryptMesssage(Id, sKey));
             }
             catch (SecurityAccessDeniedException es)
             {
@@ -109,13 +113,14 @@ namespace Client
             {
                 Console.WriteLine("Error: {0}", e.Message);
             }
+            return "";
         }
 
-        public void DeleteDatabase()
+        public string DeleteDatabase()
         {
             try
             {
-                factory.DeleteDatabase();
+                return factory.DeleteDatabase();
             }
             catch (SecurityAccessDeniedException es)
             {
@@ -125,11 +130,29 @@ namespace Client
             {
                 Console.WriteLine("Error: {0}", e.Message);
             }
+            return "";
         }
 
         public string GetSecretKey()
         {
             return factory.GetSecretKey();
+        }
+
+        public string ArchiveDatabase()
+        {
+            try
+            {
+                return factory.ArchiveDatabase();
+            }
+            catch (SecurityAccessDeniedException es)
+            {
+                Console.WriteLine("There was a error completing action: 'ArchiveDatabase'. Message: " + es.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+            return "";
         }
     }
 }

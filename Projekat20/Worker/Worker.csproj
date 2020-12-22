@@ -46,6 +46,11 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\ConsumptionZones.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConsumptionZones.resx</DependentUpon>
+    </Compile>
     <Compile Include="WorkerServer.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -56,6 +61,12 @@
       <Project>{DC8FCE0E-C850-453B-800D-F487A4FBA4D4}</Project>
       <Name>Contracts</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\ConsumptionZones.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConsumptionZones.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

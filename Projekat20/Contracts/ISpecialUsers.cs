@@ -11,24 +11,26 @@ namespace Contracts
     public interface ISpecialUsers
     {
         [OperationContract]
-        void ModifyValue(string id, string newValue); // only for operators
+        string ModifyValue(string id, string newValue); // only for operators
 
         [OperationContract]
-        void ModifyID(string oldId, string newId);    // only for operators
+        string ModifyID(string oldId, string newId);    // only for operators
 
         [OperationContract]
-        void AddEntity(string Id, string value, string name);    // only for administrators
+        string AddEntity(string Id, string value, string name);    // only for administrators
 
         [OperationContract]
-        void DeleteEntity(string Id);    // only for administrators
+        string DeleteEntity(string Id);    // only for administrators
 
         [OperationContract]
-        void DeleteDatabase();    // only for super administrators
+        string DeleteDatabase();    // only for super administrators
 
         [OperationContract]
-        void GetElectricityConsumption(string imeprezime, string uid);
+        string GetElectricityConsumption(string imeprezime, string uid);
 
         [OperationContract]
         string GetSecretKey();
+        [OperationContract]
+        string ArchiveDatabase();
     }
 }

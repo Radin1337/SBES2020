@@ -15,7 +15,7 @@ namespace Server
     public class WCFServer : ISpecialUsers
     {
 
-        public void GetElectricityConsumption(string imeprezime, string uid)
+        public string GetElectricityConsumption(string imeprezime, string uid)
         {
             Console.WriteLine("Called method: GET ELECTRICITY CONSUMPTION");
 
@@ -33,11 +33,19 @@ namespace Server
             string decryptedUId = DecryptionAlgorithm.DecryptMessage(uid, SecretKey.sKey);
 
             List<string> retValue = ForwardToLoadBalancer(new List<string> { "GetElectricityConsumption", decryptedImePrezime, decryptedUId});
+
+            string retMessage="";
+
+            foreach(string str in retValue)
+            {
+                retMessage = retMessage + '\t' + str;
+            }
+            return retMessage;
         }
 
 
         [PrincipalPermission(SecurityAction.Demand, Role = "Add")]
-        public void AddEntity(string Id, string value,string name)
+        public string AddEntity(string Id, string value,string name)
         {
             Console.WriteLine("Called method: ADD ENTITY");
             
@@ -56,10 +64,18 @@ namespace Server
             string decryptedName = DecryptionAlgorithm.DecryptMessage(name, SecretKey.sKey);
 
             List<string> retValue = ForwardToLoadBalancer(new List<string> {"AddEntity",decryptedId, decryptedValue,decryptedName });
+
+            string retMessage = "";
+
+            foreach (string str in retValue)
+            {
+                retMessage = retMessage + '\t' + str;
+            }
+            return retMessage;
         }
 
         [PrincipalPermission(SecurityAction.Demand, Role = "DeleteAll")]
-        public void DeleteDatabase()
+        public string DeleteDatabase()
         {
             Console.WriteLine("Called method: DELETE DATABASE");
             
@@ -72,10 +88,41 @@ namespace Server
             Console.WriteLine("Client name : " + windowsIdentity.Name);
 
             List<string> retValue = ForwardToLoadBalancer(new List<string> {"DeleteDatabase" });
+
+            string retMessage = "";
+
+            foreach (string str in retValue)
+            {
+                retMessage = retMessage + '\t' + str;
+            }
+            return retMessage;
+        }
+        [PrincipalPermission(SecurityAction.Demand, Role = "DeleteAll")]
+        public string ArchiveDatabase()
+        {
+            Console.WriteLine("Called method: ARCHIVE DATABASE");
+
+            IIdentity identity = Thread.CurrentPrincipal.Identity;
+
+            Console.WriteLine("Authentification type : " + identity.AuthenticationType);
+
+            WindowsIdentity windowsIdentity = identity as WindowsIdentity;
+
+            Console.WriteLine("Client name : " + windowsIdentity.Name);
+
+            List<string> retValue = ForwardToLoadBalancer(new List<string> { "ArchiveDatabase" });
+
+            string retMessage = "";
+
+            foreach (string str in retValue)
+            {
+                retMessage = retMessage + '\t' + str;
+            }
+            return retMessage;
         }
 
         [PrincipalPermission(SecurityAction.Demand, Role = "Delete")]
-        public void DeleteEntity(string Id)
+        public string DeleteEntity(string Id)
         {
             Console.WriteLine("Called method: DELETE ENTITY");
             
@@ -92,12 +139,20 @@ namespace Server
             string decryptedId = DecryptionAlgorithm.DecryptMessage(Id, SecretKey.sKey);
 
             List<string> retValue = ForwardToLoadBalancer(new List<string> {"DeleteEntity",decryptedId});
+
+            string retMessage = "";
+
+            foreach (string str in retValue)
+            {
+                retMessage = retMessage + '\t' + str;
+            }
+            return retMessage;
         }
 
        
 
         [PrincipalPermission(SecurityAction.Demand, Role = "Modify")]
-        public void ModifyID(string oldId, string newId)
+        public string ModifyID(string oldId, string newId)
         {
             Console.WriteLine("Called method: MODIFY ID");
             
@@ -114,11 +169,19 @@ namespace Server
             string decryptedOldId = DecryptionAlgorithm.DecryptMessage(oldId, SecretKey.sKey);
             string decryptedNewId = DecryptionAlgorithm.DecryptMessage(newId, SecretKey.sKey);
 
-            List<string> retValue = ForwardToLoadBalancer(new List<string> {"modifyID", decryptedOldId, decryptedNewId });
+            List<string> retValue = ForwardToLoadBalancer(new List<string> {"ModifyID", decryptedOldId, decryptedNewId });
+
+            string retMessage = "";
+
+            foreach (string str in retValue)
+            {
+                retMessage = retMessage + '\t' + str;
+            }
+            return retMessage;
         }
 
         [PrincipalPermission(SecurityAction.Demand, Role = "Modify")]
-        public void ModifyValue(string id, string newValue)
+        public string ModifyValue(string id, string newValue)
         {
             Console.WriteLine("Called method: MODIFY VALUE");
             
@@ -135,7 +198,15 @@ namespace Server
             string decryptedId = DecryptionAlgorithm.DecryptMessage(id, SecretKey.sKey);
             string decryptedNewValue = DecryptionAlgorithm.DecryptMessage(newValue, SecretKey.sKey);
 
-            List<string> retValue = ForwardToLoadBalancer(new List<string> {"modifyValue", decryptedId, decryptedNewValue});
+            List<string> retValue = ForwardToLoadBalancer(new List<string> {"ModifyValue", decryptedId, decryptedNewValue});
+
+            string retMessage = "";
+
+            foreach (string str in retValue)
+            {
+                retMessage = retMessage + '\t' + str;
+            }
+            return retMessage;
         }
 
 
@@ -157,6 +228,7 @@ namespace Server
         {
             return SecretKey.sKey;
         }
+
     }
     
 }
