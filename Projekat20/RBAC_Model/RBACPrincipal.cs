@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using System.ServiceModel;
 
 namespace RBAC_Model
 {
@@ -34,11 +35,33 @@ namespace RBAC_Model
                    foreach (string permision in permissions) //through all permissions
                     {
                         if (permision.Equals(permission))//check permission match
+                        {
+                            try
+                            {
+                                Audit.AuthorizationSuccess(Formatter.ParseName(identity.Name),
+                                OperationContext.Current.IncomingMessageHeaders.Action);
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
                             return true;
+                        }
                     }
                     // return permissions.Contains(permission);                   
                 }
             }
+
+            try
+            {
+               Audit.AuthorizationFailed(Formatter.ParseName(identity.Name),
+               OperationContext.Current.IncomingMessageHeaders.Action, $"Need {permission} permission");
+            }
+            catch (Exception e)
+            {
+               Console.WriteLine(e.Message);
+            }
+
             return false;
         }
     }
