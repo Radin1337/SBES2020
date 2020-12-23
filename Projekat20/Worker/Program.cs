@@ -15,7 +15,6 @@ namespace Worker
     {
         static void Main(string[] args)
         {
-            Console.ReadKey();
             string wCertCN = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);
             string lbCertCN = "loadbalancer";
             int port = 9990;
